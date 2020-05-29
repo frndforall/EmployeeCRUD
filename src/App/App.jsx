@@ -7,7 +7,7 @@ import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
-import { EmployeeDetails } from '../Employees';
+import { EmployeeDetails,AddEmployee } from '../Employees';
 
 class App extends React.Component {
     constructor(props) {
@@ -31,8 +31,9 @@ class App extends React.Component {
                         }
                         <Router history={history}>
                             <div>
-                                <PrivateRoute exact path="/" component={EmployeeDetails} />
-                                <Route path="/login" component={LoginPage} />
+                                <PrivateRoute exact path="/EmployeeList" component={EmployeeDetails} />
+                                <PrivateRoute exact path="/AddEmployee" component={AddEmployee} />
+                                <Route exact path="/" component={LoginPage} />
                             </div>
                         </Router>
                     </div>

@@ -1,11 +1,13 @@
 import { employeeConstants } from '../_constants';
 import { employeeservice } from '../_services';
 import { alertActions } from '.';
+import { history } from '../_helpers';
 
 export const employeeactions = {
     getAllEmployees,
     // getEmployeeDetails,
     // updateEmployee,
+    createEmployee,
     deleteEmployee
     
 };
@@ -47,5 +49,22 @@ function deleteEmployee(id) {
     function request() { return { type: employeeConstants.GET_DELETE_REQUEST} }
     function success(employee) { return { type: employeeConstants.GET_DELETE_SUCCESS, employee } }
     function failure(error) { return { type: employeeConstants.GET_DELETE_FAILURE, error } }
+}
+
+function createEmployee(payload) {
+
+    return dispatch => {
+        // dispatch(request());
+        employeeservice.createEmployee(payload)
+            .then(
+                employee => { 
+                    dispatch(success(employee));
+                    history.push('/EmployeeList');
+                }
+            );
+    };
+    function request() { return { type: employeeConstants.GET_CREATE_REQUEST} }
+    function success(employee) { return { type: employeeConstants.GET_CREATE_SUCCESS, employee } }
+    function failure(error) { return { type: employeeConstants.GET_CREATE_FAILURE, error } }
 }
 

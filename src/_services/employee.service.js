@@ -41,8 +41,8 @@ function createEmployee(payload) {
     };
     return fetch('http://localhost:3001/api/v1/employees/create', requestOptions)
     .then(handleResponse)
-    .then(employees => {
-        return employees;
+    .then(employee => {
+        return employee;
     });
 }
 

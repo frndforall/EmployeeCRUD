@@ -5,29 +5,6 @@ import { Button, Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap
 
 import { employeeactions } from '../_actions';
 
-
-function EmployeeData(props) {
-    const item = props.item
-    return (
-          <Col xs="8" sm="6" md="8">
-              <Card>
-                <CardHeader>
-                    Name: {item.name}
-                </CardHeader>
-                <CardBody>
-                    Email: {item.email}<br/>
-                    Salary: {item.salary}<br/>
-                    Email: {item.age}<br/>
-
-                    <Button>Edit</Button>
-                    <Button onClick={props.onDelete}>Delete</Button>
-
-                </CardBody>
-              </Card>
-              </Col>
-    )
-  }
-
 class EmployeeDetails extends React.Component {
 
     constructor(props) {
@@ -63,23 +40,6 @@ class EmployeeDetails extends React.Component {
                 {employees.loading && <em>Loading users...</em>}
                 {employees.error && <span className="text-danger">ERROR</span>}
                 {employees.items &&
-                    // <Row>
-                    // <Col xl={30}>
-                    //     <Card>
-                    //     <CardHeader>
-                           
-                    //     </CardHeader>
-                    //     <CardBody>
-                    //         <Row>
-                    //             {employees.items.map((item, index) =>
-                    //             <EmployeeData key={index} item={item} onDelete={() => {this.confirmDelete(item._id)}} />
-                    //             )}
-                    //         </Row> 
-                            
-                    //     </CardBody>
-                    //     </Card>
-                    // </Col>
-                    // </Row>
                     <Row>  
                             <Col>  
                             <Card> 
@@ -126,7 +86,7 @@ class EmployeeDetails extends React.Component {
                 }
             
                 <p>
-                    <Link to="/login">Logout</Link>
+                    <Link to="/">Logout</Link> <t/>  <Link to="/AddEmployee">Add Employee</Link>
                 </p>
           </div>
         );
