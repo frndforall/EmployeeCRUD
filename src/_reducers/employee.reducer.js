@@ -14,6 +14,15 @@ export function employees(state = {}, action) {
       return { 
         error: action.error
       };
+
+      case employeeConstants.GET_DELETE_REQUEST:
+        return {
+          loading: true
+        };
+      case employeeConstants.GET_DELETE_FAILURE:
+        return { 
+          error: action.error
+        };
     default:
       return state
   }

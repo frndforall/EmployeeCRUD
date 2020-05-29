@@ -6,17 +6,18 @@ export const employeeactions = {
     getAllEmployees,
     // getEmployeeDetails,
     // updateEmployee,
-    // deleteEmployee
+    deleteEmployee
     
 };
 
 function getAllEmployees() {
     return dispatch => {
+        debugger;
         dispatch(request());
-
         employeeservice.getAllEmployees()
             .then(
                 employees => { 
+                    debugger;
                     dispatch(success(employees));
                 },
                 error => {
@@ -31,23 +32,20 @@ function getAllEmployees() {
     function failure(error) { return { type: employeeConstants.GETALL_FAILURE, error } }
 }
 
-// function logout() {
-//     userService.logout();
-//     return { type: userConstants.LOGOUT };
-// }
+function deleteEmployee(id) {
+    return dispatch => {
+        // dispatch(request());
+        employeeservice.deleteEmployee(id)
+            .then(
+                employee => { 
+                    dispatch(success(employee));
+                    dispatch(employeeactions.getAllEmployees());
+                }
+            );
+    };
 
-// function getAll() {
-//     return dispatch => {
-//         dispatch(request());
+    function request() { return { type: employeeConstants.GET_DELETE_REQUEST} }
+    function success(employee) { return { type: employeeConstants.GET_DELETE_SUCCESS, employee } }
+    function failure(error) { return { type: employeeConstants.GET_DELETE_FAILURE, error } }
+}
 
-//         userService.getAll()
-//             .then(
-//                 users => dispatch(success(users)),
-//                 error => dispatch(failure(error))
-//             );
-//     };
-
-//     function request() { return { type: userConstants.GETALL_REQUEST } }
-//     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-//     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
-// }

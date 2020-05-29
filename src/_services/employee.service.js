@@ -26,7 +26,7 @@ function getEmployeeDetails(id){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/employee/employeeDetails?id='+{id}, requestOptions)
+    return fetch('http://localhost:3001/api/v1/employees/employeeDetails?id='+{id}, requestOptions)
     .then(handleResponse)
     .then(employees => {
         return employees;
@@ -39,7 +39,7 @@ function createEmployee(payload) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     };
-    return fetch('http://localhost:3001/api/v1/employee/create', requestOptions)
+    return fetch('http://localhost:3001/api/v1/employees/create', requestOptions)
     .then(handleResponse)
     .then(employees => {
         return employees;
@@ -53,7 +53,7 @@ function updateEmployee(payload,id) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     };
-    return fetch('http://localhost:3001/api/v1/employee/update?id='+id, requestOptions)
+    return fetch('http://localhost:3001/api/v1/employees/update?id='+id, requestOptions)
     .then(handleResponse)
     .then(employee => {
         return employee;
@@ -61,16 +61,16 @@ function updateEmployee(payload,id) {
 }
 
 
-function deleteEmployee(payload,id) {
+function deleteEmployee(id) {
     const requestOptions = {
         method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
     };
-    return fetch('http://localhost:3001/api/v1/employee/delete?id='+id, requestOptions)
-    .then(handleResponse)
+    return fetch('http://localhost:3001/api/v1/employees/delete?id='+id, requestOptions)
+    // .then(handleResponse)
     .then(employee => {
+        debugger;
         return employee;
+        // getAllEmployees();
     });
 }
 
@@ -80,16 +80,16 @@ function logout() {
 }
 
 function handleResponse(response) {
+    debugger;
+    console.log(response);
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-            
             }
-
-            const error = (data && data.message) || response.statusText;
+            const error = (data && data.message) || response.statusText || 'Error is processing the request';
             return Promise.reject(error);
         }
 
