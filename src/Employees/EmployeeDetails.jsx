@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import {Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import Nav from '../App/Nav';
 
 import { employeeactions } from '../_actions';
 
@@ -40,6 +41,7 @@ class EmployeeDetails extends React.Component {
         debugger;
         return (
             <div className="animated fadeIn">
+                <Nav />
                 <h1> Employee Details</h1>
                 {employees.loading && <em>Loading users...</em>}
                 {employees.error && <span className="text-danger">ERROR</span>}
@@ -88,10 +90,7 @@ class EmployeeDetails extends React.Component {
                             </Col>  
                         </Row>
                 }
-            
-                <p>
-                    <Link to="/">Logout</Link> <t/>  <Link to="/AddEmployee">Add Employee</Link>
-                </p>
+
           </div>
         );
     }

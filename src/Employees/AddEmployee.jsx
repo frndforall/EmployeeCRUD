@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button,  Card, CardBody, Container, CardFooter, Form, Col, Row } from 'reactstrap';
 import { employeeactions } from '../_actions';
 import { history } from '../_helpers';
+import Nav from '../App/Nav';
 
 // import { employeeactions } from '../_actions';
 
@@ -70,6 +71,7 @@ class AddEmployee extends React.Component {
         const {name,email,age,salary,submitted } = this.state;
         return (
             <div className="app flex-row align-items-center">  
+            <Nav />
             <Container>  
               <Row className="justify-content-center">  
                 <Col md="12" lg="10" xl="8">  
