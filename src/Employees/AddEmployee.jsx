@@ -31,7 +31,6 @@ class AddEmployee extends React.Component {
 
 
     handleChange(e) {
-      debugger;
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }

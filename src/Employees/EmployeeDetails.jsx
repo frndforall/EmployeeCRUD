@@ -37,10 +37,10 @@ class EmployeeDetails extends React.Component {
 
     render() {
         const {employees} = this.props;
+        debugger;
         return (
             <div className="animated fadeIn">
                 <h1> Employee Details</h1>
-
                 {employees.loading && <em>Loading users...</em>}
                 {employees.error && <span className="text-danger">ERROR</span>}
                 {employees.items &&

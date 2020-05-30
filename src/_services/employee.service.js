@@ -26,11 +26,9 @@ function getEmployeeDetails(id){
     const requestOptions = {
         method: 'get',
     };
-    debugger;
     return fetch('http://localhost:3001/api/v1/employees/employeesDetails?id='+id, requestOptions)
     .then(handleResponse)
     .then(employee => {
-        debugger;
         return employee;
     });
 }
@@ -70,7 +68,6 @@ function deleteEmployee(id) {
     return fetch('http://localhost:3001/api/v1/employees/delete?id='+id, requestOptions)
     // .then(handleResponse)
     .then(employee => {
-        debugger;
         return employee;
         // getAllEmployees();
     });
@@ -82,7 +79,6 @@ function logout() {
 }
 
 function handleResponse(response) {
-    debugger;
     console.log(response);
     return response.text().then(text => {
         const data = text && JSON.parse(text);
@@ -94,7 +90,6 @@ function handleResponse(response) {
             const error = (data && data.message) || response.statusText || 'Error is processing the request';
             return Promise.reject(error);
         }
-        debugger;
         return data;
     });
 }

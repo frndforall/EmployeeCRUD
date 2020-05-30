@@ -14,12 +14,10 @@ export const employeeactions = {
 
 function getAllEmployees() {
     return dispatch => {
-        debugger;
         dispatch(request());
         employeeservice.getAllEmployees()
             .then(
                 employees => { 
-                    debugger;
                     dispatch(success(employees));
                 },
                 error => {
@@ -103,7 +101,6 @@ function updateEmployee(payload,id) {
 function getEmployeeDetails(id) {
     return dispatch => {
         dispatch(request());
-        debugger;
         employeeservice.getEmployeeDetails(id)
             .then(
                 employee => { 

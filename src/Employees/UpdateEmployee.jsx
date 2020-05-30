@@ -36,11 +36,8 @@ class UpdateEmployee extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     console.log('props recieved',nextProps);
-
     let data = nextProps.employeeDetails;
-    debugger;
     if(data && data.items) {
       this.setState({
         _id: data.items._id,
@@ -81,10 +78,8 @@ class UpdateEmployee extends React.Component {
     }
 
     render() {
-        debugger;
         const {employeeDetails} = this.props;
         const {name,email,age,salary,submitted } = this.state;
-        debugger;
           return (
             <div className="app flex-row align-items-center">  
             <Container>  
