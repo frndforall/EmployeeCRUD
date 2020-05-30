@@ -8,12 +8,13 @@ import { history } from '../_helpers';
 // import { employeeactions } from '../_actions';
 
 
-class AddEmployee extends React.Component {
+class UpdateEmployee extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            _id: '',
             name: '',
             email: '',
             age:'',
@@ -25,33 +26,45 @@ class AddEmployee extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    componentDidMount() {
+      console.log(this.props.match.params.id);
+      this.props.dispatch(employeeactions.getEmployeeDetails(this.props.match.params.id));
+  }
+
+  componentDidUpdate() {
+      console.log('did update');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    debugger;
+    console.log('props recieved',nextProps);
+
+    let data = nextProps.employeeDetails;
+    debugger;
+    if(data && data.items) {
+      this.setState({
+        _id: data.items._id,
+        name: data.items.name,
+        email: data.items.email,
+        salary: data.items.salary,
+        age: data.items.age
+      });
+    }
+      
+    
+    // console.log('props recieved',nextProps.employees.items.salary);
+}
+
     onCancel= (e) => {
         history.push('/EmployeeList');
     }
 
 
     handleChange(e) {
-      debugger;
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-
-    // handleSubmit (e) {
-    //     this.setState({ submitted: true });
-    //     const { dispatch } = this.props;
-    //     const {name,email,age,salary,submitted } = this.state;
-    //     if (name && email && age && salary) {
-    //         let payload={
-    //             name: this.state.name,
-    //             email: this.state.email,
-    //             salary: this.state.salary,
-    //             age: this.state.age,
-    //         }
-    //         dispatch(employeeactions.createEmployee(payload));
-    //     }
-
-    // }
-
+    
     handleClick(e){
         this.setState({ submitted: true });
         const { dispatch } = this.props;
@@ -63,13 +76,16 @@ class AddEmployee extends React.Component {
                 salary: this.state.salary,
                 age: this.state.age,
             }
-            dispatch(employeeactions.createEmployee(payload));
+            dispatch(employeeactions.updateEmployee(payload,this.state._id));
         }
     }
 
     render() {
+        debugger;
+        const {employeeDetails} = this.props;
         const {name,email,age,salary,submitted } = this.state;
-        return (
+        debugger;
+          return (
             <div className="app flex-row align-items-center">  
             <Container>  
               <Row className="justify-content-center">  
@@ -77,7 +93,10 @@ class AddEmployee extends React.Component {
                   <Card className="mx-4">  
                     <CardBody className="p-4">  
                       <Form>  
-                        <h1>Add Employee</h1>  
+                        <h1>Update Employee</h1>
+                        {employeeDetails.loading && <em>Loading users...</em>}
+                        {employeeDetails.error && <span className="text-danger">ERROR</span>}
+                        {employeeDetails.items &&  <div>
 
                         <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
                             <label htmlFor="name">Name</label>
@@ -86,9 +105,6 @@ class AddEmployee extends React.Component {
                                 <div className="help-block">Name is required</div>
                             }
                         </div>
-                        {/* <InputGroup className="mb-3">  
-                          <Input type="text" name="name" id="name" placeholder="Name" val  onChange={ this.handleChange }  />  
-                        </InputGroup>   */}
                          <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
                             <label htmlFor="email">Email</label>
                             <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
@@ -110,25 +126,18 @@ class AddEmployee extends React.Component {
                                 <div className="help-block">Name is required</div>
                             }
                         </div>
-                         {/* <InputGroup className="mb-3">  
-                          <Input type="text" placeholder="Email" name="email" id="email"  onChange={ this.handleChange }/>  
-                        </InputGroup>  
-                        <InputGroup className="mb-3">  
-                          <Input type="text" placeholder="Age" name="age" id="age"  onChange={ this.handleChange }  />  
-                        </InputGroup>  
-                        <InputGroup className="mb-4">  
-                          <Input type="text" placeholder="Salary" name="salary" id="salary" onChange={ this.handleChange }  />  
-                        </InputGroup>    */}
-                   <CardFooter className="p-4">  
-                      <Row>  
-                        <Col xs="12" sm="6">  
-                          <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Save</span></Button>  
-                        </Col>  
-                        <Col xs="12" sm="6">  
-                          <Button className="btn btn-info mb-1" block onClick={this.onCancel}><span>Cancel</span></Button>  
-                        </Col>  
-                      </Row>  
-                    </CardFooter>  
+                        </div>
+                       }
+                      <CardFooter className="p-4">  
+                          <Row>  
+                            <Col xs="12" sm="6">  
+                              <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Update</span></Button>  
+                            </Col>  
+                            <Col xs="12" sm="6">  
+                              <Button className="btn btn-info mb-1" block onClick={this.onCancel}><span>Cancel</span></Button>  
+                            </Col>  
+                          </Row>  
+                        </CardFooter>  
                       </Form>  
                     </CardBody>  
                   </Card>  
@@ -141,11 +150,15 @@ class AddEmployee extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { employees } = state;
+    const { employeeDetails } = state;
     return {
-        employees
+      // name: employees.items.name,
+      // email: employees.items.email,
+      // salary: employees.items.salary,
+      // age: employees.items.age
+      employeeDetails
     };
 }
 
-const connectedEmployee = connect(mapStateToProps)(AddEmployee);
-export { connectedEmployee as AddEmployee };
+const connectedEmployee = connect(mapStateToProps)(UpdateEmployee);
+export { connectedEmployee as UpdateEmployee };

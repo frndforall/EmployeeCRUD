@@ -11,7 +11,7 @@ class EmployeeDetails extends React.Component {
         super(props);
         this.deleteEmployee =this.deleteEmployee.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
-        this.updateEmployee = this.updateEmployee(this);
+        this.editEmployee = this.editEmployee.bind(this);
     }
 
     componentDidMount() {
@@ -22,8 +22,12 @@ class EmployeeDetails extends React.Component {
         this.props.dispatch(employeeactions.deleteEmployee(id));
     }
 
-    updateEmployee = (id) => {
-        // this.props.dispatch(employeeactions.deleteEmployee(id));
+    editEmployee(id){
+        console.log(id);
+        this.props.history.push({  
+        pathname: '/update/' + id  
+        }); 
+        // window.confirm("Are you sure you wish to update this item?");
     }
 
     confirmDelete = (_id) => {
@@ -71,7 +75,7 @@ class EmployeeDetails extends React.Component {
                                             <td>{item.salary}</td>  
                                             <td>  
                                             <div class="btn-group">  
-                                                <button className="btn btn-warning" onClick={() => { this.updateEmployee(item._id) }}>Edit</button>  
+                                                <button className="btn btn-warning" onClick={() => { this.editEmployee(item._id) }}>Edit</button>  
                                                 <button className="btn btn-warning" onClick={() => { this.confirmDelete(item._id) }}>Delete</button>  
                                             </div>  
                                             </td>  

@@ -26,10 +26,12 @@ function getEmployeeDetails(id){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/employees/employeeDetails?id='+{id}, requestOptions)
+    debugger;
+    return fetch('http://localhost:3001/api/v1/employees/employeesDetails?id='+id, requestOptions)
     .then(handleResponse)
-    .then(employees => {
-        return employees;
+    .then(employee => {
+        debugger;
+        return employee;
     });
 }
 
@@ -40,7 +42,7 @@ function createEmployee(payload) {
         body: JSON.stringify(payload)
     };
     return fetch('http://localhost:3001/api/v1/employees/create', requestOptions)
-    .then(handleResponse)
+    // .then(handleResponse)
     .then(employee => {
         return employee;
     });
@@ -54,7 +56,7 @@ function updateEmployee(payload,id) {
         body: JSON.stringify(payload)
     };
     return fetch('http://localhost:3001/api/v1/employees/update?id='+id, requestOptions)
-    .then(handleResponse)
+    // .then(handleResponse)
     .then(employee => {
         return employee;
     });
@@ -92,7 +94,7 @@ function handleResponse(response) {
             const error = (data && data.message) || response.statusText || 'Error is processing the request';
             return Promise.reject(error);
         }
-
+        debugger;
         return data;
     });
 }
