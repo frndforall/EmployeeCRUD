@@ -1,11 +1,8 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button,  Card, CardBody, Container, CardFooter, Form, Col, Row } from 'reactstrap';
 import { employeeactions } from '../_actions';
 import { history } from '../_helpers';
-
-// import { employeeactions } from '../_actions';
 
 
 class UpdateEmployee extends React.Component {
@@ -47,9 +44,6 @@ class UpdateEmployee extends React.Component {
         age: data.items.age
       });
     }
-      
-    
-    // console.log('props recieved',nextProps.employees.items.salary);
 }
 
     onCancel= (e) => {

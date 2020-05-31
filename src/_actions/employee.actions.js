@@ -37,9 +37,14 @@ function deleteEmployee(id) {
         dispatch(request());
         employeeservice.deleteEmployee(id)
             .then(
-                employee => { 
-                    dispatch(success(employee));
-                    dispatch(employeeactions.getAllEmployees());
+                employee => {
+                    if(employee.ok) {
+                        dispatch(success(employee));
+                        dispatch(employeeactions.getAllEmployees());
+                    } else {
+                        dispatch(failure('Error Processing request'));
+                        
+                    }
                 },
                 error => {
                     dispatch(failure(error));
@@ -69,7 +74,7 @@ function createEmployee(payload) {
                 }
             );
     };
-    function request() { return { type: employeeConstants.GET_CREATE_REQUEST} }
+    // function request() { return { type: employeeConstants.GET_CREATE_REQUEST} }
     function success(employee) { return { type: employeeConstants.GET_CREATE_SUCCESS, employee } }
     function failure(error) { return { type: employeeConstants.GET_CREATE_FAILURE, error } }
 }
@@ -91,7 +96,7 @@ function updateEmployee(payload,id) {
                 }
             );
     };
-    function request() { return { type: employeeConstants.GET_UPDATE_REQUEST} }
+    // function request() { return { type: employeeConstants.GET_UPDATE_REQUEST} }
     function success(employee) { return { type: employeeConstants.GET_UPDATE_SUCCESS, employee } }
     function failure(error) { return { type: employeeConstants.GET_UPDATE_FAILURE, error } }
 }
@@ -111,6 +116,6 @@ function getEmployeeDetails(id) {
 
     function request() { return { type: employeeConstants.GET_DETAILS_REQUEST} }
     function success(employee) { return { type: employeeConstants.GET_DETAILS_SUCCESS, employee } }
-    function failure(error) { return { type: employeeConstants.GET_DETAILS_FAILURE, error } }
+    // function failure(error) { return { type: employeeConstants.GET_DETAILS_FAILURE, error } }
 }
 
