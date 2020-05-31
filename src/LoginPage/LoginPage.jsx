@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import { userActions } from '../_actions';
 
 class LoginPage extends React.Component {
@@ -59,8 +59,11 @@ class LoginPage extends React.Component {
                         }
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
+                        <button className="btn btn-primary">Login</button> 
                     </div>
+                    <p>
+                        Haven't Registered yet!! . <Link to={'/Register'}>Try Registering</Link>
+                    </p>
                 </form>
             </div>
             </div>

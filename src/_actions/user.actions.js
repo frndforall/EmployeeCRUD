@@ -6,6 +6,7 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
+    register,
     getAll
 };
 
@@ -30,6 +31,31 @@ function login(username, password) {
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
+
+function register(payload) {
+    console.log('Inside register'+payload);
+    return dispatch => {
+        // dispatch(request(request()));
+        userService.register(payload)
+            .then(
+                user => { 
+                    dispatch(success(user));
+                    history.push('/');
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.GET_REGISTER_REQUEST, user } }
+    function success(user) { return { type: userConstants.GET_REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.GET_REGISTER_FAILURE, error } }
+}
+
+
+
 
 function logout() {
     userService.logout();

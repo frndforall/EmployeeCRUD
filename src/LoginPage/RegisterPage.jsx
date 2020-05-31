@@ -1,29 +1,25 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button,  Card, CardBody, Container, CardFooter, Form, Col, Row } from 'reactstrap';
-import { employeeactions } from '../_actions';
 import { history } from '../_helpers';
-import Nav from '../App/Nav';
-
-// import { employeeactions } from '../_actions';
+import { userActions } from '../_actions';
 
 
-class AddEmployee extends React.Component {
+class RegisterPage extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             name: '',
+            username: '',
             email: '',
-            age:'',
-            salary:'',
+            password: '',
+            passwordConfirmation: '',
             submitted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleNumberChange = this.handleNumberChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -37,46 +33,48 @@ class AddEmployee extends React.Component {
         this.setState({ [name]: value });
     }
 
-    handleNumberChange(e) {
-      const re = /^[0-9\b]+$/;
-      const { name, value } = e.target;
-      if(re.test(value)) {
-        this.setState({ [name]: value });
-      }
-    }
-
     handleClick(e){
         this.setState({ submitted: true });
         const { dispatch } = this.props;
-        const {name,email,age,salary,submitted } = this.state;
-        if (name && email && age && salary) {
+        const {name,username,email,password,passwordConfirmation } = this.state;
+        if (name && username && email && password && passwordConfirmation) {
             let payload={
-                name: this.state.name,
                 email: this.state.email,
-                salary: this.state.salary,
-                age: this.state.age,
+                name: this.state.name,
+                username: this.state.username,
+                password: this.state.password,
+                passwordConfirmation: this.state.passwordConfirmation
             }
-            dispatch(employeeactions.createEmployee(payload));
+            // dispatch(employeeactions.createEmployee(payload));
+            console.log(payload);
+            dispatch(userActions.register(payload));
         }
     }
 
     render() {
-        const {name,email,age,salary,submitted } = this.state;
+        const {name,username,email,password,passwordConfirmation,submitted } = this.state;
         return (
             <div className="app flex-row align-items-center">  
-            <Nav />
             <Container>  
               <Row className="justify-content-center">  
                 <Col md="12" lg="10" xl="8">  
                   <Card className="mx-4">  
                     <CardBody className="p-4">  
                       <Form>  
-                        <h1>Add Employee</h1>  
+                        <h1>Register</h1>  
 
                         <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
                             <label htmlFor="name">Name</label>
                             <input type="text" className="form-control" name="name" value={name} onChange={this.handleChange} />
                             {submitted && !name &&
+                                <div className="help-block">Name is required</div>
+                            }
+                        </div>
+
+                        <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+                            <label htmlFor="name">User Name</label>
+                            <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
+                            {submitted && !username &&
                                 <div className="help-block">Name is required</div>
                             }
                         </div>
@@ -88,26 +86,25 @@ class AddEmployee extends React.Component {
                                 <div className="help-block">Email is required</div>
                             }
                         </div>
-                        <div className={'form-group' + (submitted && !salary ? ' has-error' : '')}>
-                            <label htmlFor="salary">Salary</label>
-                            <input type="text" className="form-control" name="salary" value={salary} onChange={this.handleNumberChange} />
-                            {submitted && !salary &&
-                                <div className="help-block">Salary is required</div>
+                        <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                            <label htmlFor="salary">Password</label>
+                            <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
+                            {submitted && !password &&
+                                <div className="help-block">Password is required</div>
                             }
                         </div>
-                        <div className={'form-group' + (submitted && !age ? ' has-error' : '')}>
-                            <label htmlFor="age">Age</label>
-                            <input type="text" className="form-control" name="age" value={age} onChange={this.handleNumberChange} />
-                            {submitted && !age &&
-                                <div className="help-block">Name is required</div>
+                        <div className={'form-group' + (submitted && !passwordConfirmation ? ' has-error' : '')}>
+                            <label htmlFor="salary">Confirm Password</label>
+                            <input type="password" className="form-control" name="passwordConfirmation" value={passwordConfirmation} onChange={this.handleChange} />
+                            {submitted && !passwordConfirmation &&
+                                <div className="help-block">Confirm Password is required</div>
                             }
                         </div>
                       
                    <CardFooter className="p-4">  
-                        * Please
                       <Row>  
                         <Col xs="12" sm="6">  
-                          <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Save</span></Button>  
+                          <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Register</span></Button>  
                         </Col>  
                         <Col xs="12" sm="6">  
                           <Button className="btn btn-info mb-1" block onClick={this.onCancel}><span>Cancel</span></Button>  
@@ -126,11 +123,11 @@ class AddEmployee extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { employees } = state;
-    return {
-        employees
-    };
+  const { loggingIn } = state.register;
+  return {
+      loggingIn
+  };
 }
 
-const connectedEmployee = connect(mapStateToProps)(AddEmployee);
-export { connectedEmployee as AddEmployee };
+const connectedLoginPage = connect(mapStateToProps)(RegisterPage);
+export { connectedLoginPage as RegisterPage }; 

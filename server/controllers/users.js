@@ -28,7 +28,7 @@ exports.getCurrentUser = function (req, res, next) {
 
 exports.register = function(req, res) {
   const registerData = req.body
-
+	console.log(registerData);
   if (!registerData.email) {
     return res.status(422).json({
       errors: {
@@ -48,6 +48,7 @@ exports.register = function(req, res) {
   }
 
   if (registerData.password !== registerData.passwordConfirmation) {
+	  console.log('Password mis match');
     return res.status(422).json({
       errors: {
         password: 'is not the same as confirmation password',
