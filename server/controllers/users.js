@@ -30,6 +30,7 @@ exports.register = function(req, res) {
   const registerData = req.body
 	console.log(registerData);
   if (!registerData.email) {
+	  console.log('Email required');
     return res.status(422).json({
       errors: {
         email: 'is required',
@@ -39,6 +40,7 @@ exports.register = function(req, res) {
   }
 
   if (!registerData.password) {
+	  console.log('Password required');
     return res.status(422).json({
       errors: {
         password: 'is required',
@@ -60,6 +62,7 @@ exports.register = function(req, res) {
   const user = new User(registerData);
 
   return user.save((errors, savedUser) => {
+	  console.log(errors);
     if (errors) {
       return res.status(422).json({errors})
     }

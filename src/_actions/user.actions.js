@@ -49,7 +49,7 @@ function register(payload) {
             );
     };
 
-    function request(user) { return { type: userConstants.GET_REGISTER_REQUEST, user } }
+    // function request(user) { return { type: userConstants.GET_REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.GET_REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.GET_REGISTER_FAILURE, error } }
 }

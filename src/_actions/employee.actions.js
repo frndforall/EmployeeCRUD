@@ -22,7 +22,7 @@ function getAllEmployees() {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    // dispatch(alertActions.error(error));
                 }
             );
     };
@@ -48,7 +48,7 @@ function deleteEmployee(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    // dispatch(alertActions.error(error));
                 }
             );
     };
@@ -70,7 +70,7 @@ function createEmployee(payload) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    // dispatch(alertActions.error(error));
                 }
             );
     };
@@ -92,7 +92,7 @@ function updateEmployee(payload,id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    // dispatch(alertActions.error(error));
                 }
             );
     };

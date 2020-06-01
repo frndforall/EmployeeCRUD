@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from '../_actions';
+import { Button, Col, Row } from 'reactstrap';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -41,11 +42,11 @@ class LoginPage extends React.Component {
         return (
             <div className="jumbotron">
             <div className="container">
-                <div className="col-sm-8 col-sm-offset-2">
+                <div className="col-sm-6 col-sm-offset-3">
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Email</label>
                         <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
                         {submitted && !username &&
                             <div className="help-block">Username is required</div>
@@ -58,11 +59,14 @@ class LoginPage extends React.Component {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button> 
-                    </div>
+
+                    <Row>  
+                        <Col xs="12" sm="6">  
+                          <Button className="btn btn-info mb-1" block ><span>Login</span></Button>  
+                        </Col>  
+                    </Row>  
                     <p>
-                        Haven't Registered yet!! . <Link to={'/Register'}>Try Registering</Link>
+                        Haven't Registered yet!!   <Link to={'/Register'}>Please Register</Link>
                     </p>
                 </form>
             </div>

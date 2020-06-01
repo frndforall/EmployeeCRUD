@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import Nav from '../App/Nav';
@@ -44,7 +43,7 @@ class EmployeeDetails extends React.Component {
                 <Nav />
                 <h1> Employee Details</h1>
                 {employees.loading && <em>Loading users...</em>}
-                {employees.error && <span className="text-danger">ERROR</span>}
+                {employees.error && alert('Error in API call'+employees.error)};
                 {employees.items &&
                     <Row>  
                             <Col>  

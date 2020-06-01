@@ -9,7 +9,6 @@ class UpdateEmployee extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             _id: '',
             name: '',
@@ -21,6 +20,7 @@ class UpdateEmployee extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleNumberChange = this.handleNumberChange.bind(this);
     }
 
     componentDidMount() {
@@ -55,11 +55,19 @@ class UpdateEmployee extends React.Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
+
+    handleNumberChange(e) {
+      const re = /^[0-9\b]+$/;
+      const { name, value } = e.target;
+      if(re.test(value)) {
+        this.setState({ [name]: value });
+      }
+    }
     
     handleClick(e){
         this.setState({ submitted: true });
         const { dispatch } = this.props;
-        const {name,email,age,salary,submitted } = this.state;
+        const {name,email,age,salary} = this.state;
         if (name && email && age && salary) {
             let payload={
                 name: this.state.name,
@@ -110,9 +118,9 @@ class UpdateEmployee extends React.Component {
                         </div>
                         <div className={'form-group' + (submitted && !age ? ' has-error' : '')}>
                             <label htmlFor="age">Age</label>
-                            <input type="text" className="form-control" name="age" value={age} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="age" value={age} onChange={this.handleNumberChange} />
                             {submitted && !age &&
-                                <div className="help-block">Name is required</div>
+                                <div className="help-block">Age is required</div>
                             }
                         </div>
                         </div>
@@ -141,10 +149,6 @@ class UpdateEmployee extends React.Component {
 function mapStateToProps(state) {
     const { employeeDetails } = state;
     return {
-      // name: employees.items.name,
-      // email: employees.items.email,
-      // salary: employees.items.salary,
-      // age: employees.items.age
       employeeDetails
     };
 }

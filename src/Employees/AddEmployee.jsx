@@ -48,8 +48,8 @@ class AddEmployee extends React.Component {
     handleClick(e){
         this.setState({ submitted: true });
         const { dispatch } = this.props;
-        const {name,email,age,salary,submitted } = this.state;
-        if (name && email && age && salary) {
+        const {name,email,age,salary } = this.state;
+        if (name && email && age && salary && age<100) {
             let payload={
                 name: this.state.name,
                 email: this.state.email,
@@ -99,12 +99,14 @@ class AddEmployee extends React.Component {
                             <label htmlFor="age">Age</label>
                             <input type="text" className="form-control" name="age" value={age} onChange={this.handleNumberChange} />
                             {submitted && !age &&
-                                <div className="help-block">Name is required</div>
+                                <div className="help-block">Age is required</div>
+                            }
+                             {submitted && (age > 100) &&
+                                <div className="help-block">Age cannot be greater than 100</div>
                             }
                         </div>
                       
                    <CardFooter className="p-4">  
-                        * Please
                       <Row>  
                         <Col xs="12" sm="6">  
                           <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Save</span></Button>  

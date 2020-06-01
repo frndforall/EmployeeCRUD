@@ -43,12 +43,13 @@ getMeetupByIdQuery = function(id, callback) {
 
 exports.getMeetupById = function(req, res) {
   const {id} = req.params;
-
+	console.log('Meetup By Id'+id);
   getMeetupByIdQuery(id, (errors, meetup) => {
     if (errors) {
+		console.log('Meetup errors'+errors);
       return res.status(422).send({errors});
     }
-
+	console.log(meetup);
     return res.json(meetup);
   });
 }

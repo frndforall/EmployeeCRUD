@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button,  Card, CardBody, Container, CardFooter, Form, Col, Row } from 'reactstrap';
+import { Button,  Card, CardBody, Container, Form, Col, Row } from 'reactstrap';
 import { history } from '../_helpers';
 import { userActions } from '../_actions';
 
@@ -21,6 +21,7 @@ class RegisterPage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleEmailValidation = this.handleEmailValidation.bind(this);
     }
 
     onCancel= (e) => {
@@ -34,10 +35,12 @@ class RegisterPage extends React.Component {
     }
 
     handleClick(e){
+      debugger;
         this.setState({ submitted: true });
         const { dispatch } = this.props;
         const {name,username,email,password,passwordConfirmation } = this.state;
-        if (name && username && email && password && passwordConfirmation) {
+        if (name && username && email && password && passwordConfirmation &&
+          (password.length>=6) && (password===passwordConfirmation)) {
             let payload={
                 email: this.state.email,
                 name: this.state.name,
@@ -51,10 +54,23 @@ class RegisterPage extends React.Component {
         }
     }
 
+    handleEmailValidation(value) {
+      const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(value && mailformat.test(String(value).toLowerCase)){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    
+
     render() {
         const {name,username,email,password,passwordConfirmation,submitted } = this.state;
         return (
-            <div className="app flex-row align-items-center">  
+          <div className="jumbotron">
+          <div className="container">
+              <div className="col-sm-15 col-sm-offset-2"> 
             <Container>  
               <Row className="justify-content-center">  
                 <Col md="12" lg="10" xl="8">  
@@ -65,7 +81,7 @@ class RegisterPage extends React.Component {
 
                         <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
                             <label htmlFor="name">Name</label>
-                            <input type="text" className="form-control" name="name" value={name} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="name" value={name} onChange={this.handleChange} required />
                             {submitted && !name &&
                                 <div className="help-block">Name is required</div>
                             }
@@ -75,7 +91,10 @@ class RegisterPage extends React.Component {
                             <label htmlFor="name">User Name</label>
                             <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
                             {submitted && !username &&
-                                <div className="help-block">Name is required</div>
+                                <div className="help-block">User Name is required</div>
+                            }
+                            {submitted && username && username.length<6 &&
+                                <div className="help-block">User Name is required</div>
                             }
                         </div>
                     
@@ -85,12 +104,19 @@ class RegisterPage extends React.Component {
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
                             }
+                            {/* {submitted && !this.handleEmailValidation({email}) && 
+                                <div className="help-block">Please enter a valid email format</div>
+                            } */}
+
                         </div>
                         <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                             <label htmlFor="salary">Password</label>
                             <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
                             {submitted && !password &&
                                 <div className="help-block">Password is required</div>
+                            }
+                            {submitted && password && password.length < 6 &&
+                                <div className="help-block">Password is too short to be saved</div>
                             }
                         </div>
                         <div className={'form-group' + (submitted && !passwordConfirmation ? ' has-error' : '')}>
@@ -99,9 +125,12 @@ class RegisterPage extends React.Component {
                             {submitted && !passwordConfirmation &&
                                 <div className="help-block">Confirm Password is required</div>
                             }
+                             {/* {submitted && passwordConfirmation & password && (passwordConfirmation!==password) &&
+                                <div className="help-block">Confirm Password should match the password entered</div>
+                            } */}
                         </div>
                       
-                   <CardFooter className="p-4">  
+                  
                       <Row>  
                         <Col xs="12" sm="6">  
                           <Button className="btn btn-info mb-1" block onClick={this.handleClick}><span>Register</span></Button>  
@@ -110,7 +139,7 @@ class RegisterPage extends React.Component {
                           <Button className="btn btn-info mb-1" block onClick={this.onCancel}><span>Cancel</span></Button>  
                         </Col>  
                       </Row>  
-                    </CardFooter>  
+                  
                       </Form>  
                     </CardBody>  
                   </Card>  
@@ -118,6 +147,8 @@ class RegisterPage extends React.Component {
               </Row>  
             </Container>  
           </div>  
+          </div>
+          </div>
         );
     }
 }

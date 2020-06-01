@@ -1,14 +1,12 @@
 
-import { authHeader } from '../_helpers';
-
+// import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
-    register,
-    getAll
+    register
 };
 
-let users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+// let users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
 function login(email, password) {
     const requestOptions = {
         method: 'POST',
@@ -51,14 +49,14 @@ function logout() {
     localStorage.removeItem('token');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+// function getAll() {
+//     const requestOptions = {
+//         method: 'GET',
+//         headers: authHeader()
+//     };
 
-    return Promise.resolve(JSON.stringify(users));
-}
+//     return Promise.resolve(JSON.stringify(users));
+// }
 
 function handleResponse(response) {
     return response.text().then(text => {
