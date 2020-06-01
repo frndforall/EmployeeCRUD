@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import Nav from '../App/Nav';
+import Navigation from '../App/Nav';
 
 import { employeeactions } from '../_actions';
 
@@ -40,7 +40,7 @@ class EmployeeDetails extends React.Component {
         debugger;
         return (
             <div className="animated fadeIn">
-                <Nav />
+                <Navigation />
                 <h1> Employee Details</h1>
                 {employees.loading && <em>Loading users...</em>}
                 {employees.error && alert('Error in API call'+employees.error)};
@@ -75,9 +75,10 @@ class EmployeeDetails extends React.Component {
                                             <td>{item.age}</td>  
                                             <td>{item.salary}</td>  
                                             <td>  
-                                            <div class="btn-group">  
-                                                <button className="btn btn-warning" onClick={() => { this.editEmployee(item._id) }}>Edit</button>  
-                                                <button className="btn btn-warning" onClick={() => { this.confirmDelete(item._id) }}>Delete</button>  
+                                            <div>  
+                                                <button className="btn btn-primary" block onClick={() => { this.editEmployee(item._id) }}>Edit</button>  
+                                                {' '}
+                                                <button className="btn btn-danger" block onClick={() => { this.confirmDelete(item._id) }}>Delete</button>  
                                             </div>  
                                             </td>  
                                         </tr>  

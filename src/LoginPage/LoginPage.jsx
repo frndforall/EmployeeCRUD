@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from '../_actions';
-import { Button, Col, Row } from 'reactstrap';
+import { Button,  Card, CardBody, Container, Form, Col, Row } from 'reactstrap';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -43,6 +43,11 @@ class LoginPage extends React.Component {
             <div className="jumbotron">
             <div className="container">
                 <div className="col-sm-6 col-sm-offset-3">
+                <Container>  
+                <Row className="justify-content-center">  
+                    <Col md="12" lg="15" xl="15">  
+                    <Card className="mx-8">  
+                        <CardBody className="p-4">  
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
@@ -69,6 +74,11 @@ class LoginPage extends React.Component {
                         Haven't Registered yet!!   <Link to={'/Register'}>Please Register</Link>
                     </p>
                 </form>
+                </CardBody>  
+                  </Card>  
+                </Col>  
+              </Row>  
+              </Container>
             </div>
             </div>
             </div>
