@@ -4,6 +4,7 @@ import { authentication } from './authentication.reducer';
 import { users,register } from './users.reducer';
 import { alert } from './alert.reducer';
 import { employees,employeeDetails } from './employee.reducer';
+import { meetups,meetupDetails } from './meetup.reducer';
 
 const rootReducer = combineReducers({
   authentication,
@@ -11,7 +12,9 @@ const rootReducer = combineReducers({
   register,
   alert,
   employees,
-  employeeDetails
+  employeeDetails,
+  meetups,
+  meetupDetails
 });
 
 export default rootReducer;

@@ -20,7 +20,7 @@ class Navigation extends React.Component {
                 <Link to={'/EmployeeList'} className="nav-link">Employee List</Link> 
               </li>   
               <li className="nav-item">    
-                <Link to={'/Home'} className="nav-link">Meetups</Link> 
+                <Link to={'/MeetupsList'} className="nav-link">Meetups</Link> 
               </li>
               <li className="nav-item">    
                 <Link to={'/'} className="nav-link">Logout</Link>    

@@ -6,6 +6,7 @@ import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import { LoginPage, RegisterPage } from '../LoginPage';
 import { EmployeeDetails,AddEmployee,UpdateEmployee } from '../Employees';
+import { Meetups,MeetupDetails } from '../Meetups';
 import HomePage from '../HomePage/HomePage';
 
 class App extends React.Component {
@@ -32,9 +33,10 @@ class App extends React.Component {
                         <Router history={history}>
                             <div>
                                 <PrivateRoute exact path="/EmployeeList" component={EmployeeDetails} />
+                                <PrivateRoute exact path="/MeetupsList" component={Meetups} />
                                 <PrivateRoute exact path="/AddEmployee" component={AddEmployee} />
-                                <PrivateRoute exact path="/Home" component={HomePage} />
                                 <PrivateRoute exact path='/update/:id' component={UpdateEmployee}/>
+                                <PrivateRoute exact path='/meetups/:id' component={MeetupDetails}/>
                                 <Route exact path="/" component={LoginPage} />
                                 <Route exact path="/Register" component={RegisterPage} />
                             </div>
