@@ -64,7 +64,8 @@ exports.createEmployee = function(req, res) {
   })
 }
 
-getMeetupByIdQuery = function(id, callback) {
+getEmployee = function(id, callback) {
+	console.log(id);
   Employee.findById(id)
         .exec(callback);
 }
@@ -73,7 +74,7 @@ exports.getEmployeeById = function(req, res) {
   const id = req.query.id;
   console.log(id);
 
-  getMeetupByIdQuery(id, (errors, meetup) => {
+  getEmployee(id, (errors, meetup) => {
     if (errors) {
       return res.status(422).send({errors});
     }

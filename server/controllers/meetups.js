@@ -32,7 +32,8 @@ exports.getMeetups = function(req, res) {
   });
 }
 
-getMeetupByIdQuery = function(id, callback) {
+getMeetup = function(id, callback) {
+	console.log(id+'inside method');
   Meetup.findById(id)
         .populate('meetupCreator', 'name id avatar')
         .populate('category')
@@ -43,8 +44,9 @@ getMeetupByIdQuery = function(id, callback) {
 
 exports.getMeetupById = function(req, res) {
   const {id} = req.params;
-	console.log('Meetup By Id'+id);
-  getMeetupByIdQuery(id, (errors, meetup) => {
+ 
+  getMeetup(id, (errors, meetup) => {
+	  console.log(id+'call');
     if (errors) {
 		console.log('Meetup errors'+errors);
       return res.status(422).send({errors});
@@ -78,7 +80,8 @@ exports.joinMeetup = function (req, res) {
   const user = req.user;
   const {id} = req.params;
 
-  getMeetupByIdQuery(id, (errors, meetup) => {
+  getMeetup(id, (errors, meetup) => {
+	  console.log(id+'inside method'+1);
     if (errors) {
       return res.status(422).send({errors})
     }
@@ -105,7 +108,8 @@ exports.leaveMeetup = function (req, res) {
   const user = req.user;
   const {id} = req.params;
 
-  getMeetupByIdQuery(id, (errors, meetup) => {
+  getMeetup(id, (errors, meetup) => {
+	  console.log(id+'inside method');
     if (errors) {
       return res.status(422).send({errors})
     }

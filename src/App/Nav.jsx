@@ -17,9 +17,6 @@ class Navigation extends React.Component {
               <li className="nav-item">    
                 <Link to={'/'} className="nav-link">Logout</Link>    
               </li>    
-              {/* <button class="btn btn-warning navbar-btn"><a href={'/AddEmployee'}>Add Employee</a></button>
-              <button class="btn btn-warning navbar-btn"><a href={'/EmployeeList'}>Employee List</a></button>
-              <button class="btn btn-danger navbar-btn"><a href={'/'}>Logout</a></button> */}
             </ul>    
           </div>    
         </nav> 

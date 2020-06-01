@@ -12,6 +12,7 @@ class EmployeeDetails extends React.Component {
         this.deleteEmployee =this.deleteEmployee.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
+        this.updateEmployee = this.updateEmployee.bind(this);
     }
 
     componentDidMount() {
@@ -22,12 +23,15 @@ class EmployeeDetails extends React.Component {
         this.props.dispatch(employeeactions.deleteEmployee(id));
     }
 
-    editEmployee(id){
+    updateEmployee = (id) => {
         console.log(id);
         this.props.history.push({  
         pathname: '/update/' + id  
         }); 
-        // window.confirm("Are you sure you wish to update this item?");
+    }
+
+    editEmployee(id){
+        window.confirm("Are you sure you wish to update this item?") && this.updateEmployee(id);
     }
 
     confirmDelete = (_id) => {
