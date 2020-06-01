@@ -6,6 +6,7 @@ import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import { LoginPage, RegisterPage } from '../LoginPage';
 import { EmployeeDetails,AddEmployee,UpdateEmployee } from '../Employees';
+import HomePage from '../HomePage/HomePage';
 
 class App extends React.Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class App extends React.Component {
                             <div>
                                 <PrivateRoute exact path="/EmployeeList" component={EmployeeDetails} />
                                 <PrivateRoute exact path="/AddEmployee" component={AddEmployee} />
+                                <PrivateRoute exact path="/Home" component={HomePage} />
                                 <PrivateRoute exact path='/update/:id' component={UpdateEmployee}/>
                                 <Route exact path="/" component={LoginPage} />
                                 <Route exact path="/Register" component={RegisterPage} />
