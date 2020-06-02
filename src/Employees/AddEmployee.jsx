@@ -26,6 +26,7 @@ class AddEmployee extends React.Component {
         this.handleNumberChange = this.handleNumberChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleEmailValidation = this.handleEmailValidation.bind(this);
+        this.verifyEmail = this.verifyEmail.bind(this);
     }
 
     onCancel= (e) => {
@@ -46,11 +47,25 @@ class AddEmployee extends React.Component {
       }
     }
 
+    verifyEmail(email) {
+      debugger;
+      const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(email && mailformat.test(email)){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    handleEmailValidation(value) {
+      this.verifyEmail(value.email);
+    }
+
     handleClick(e){
         this.setState({ submitted: true });
         const { dispatch } = this.props;
         const {name,email,age,salary } = this.state;
-        if (name && email && age && salary && age<100) {
+        if (name && email && age && salary && age<100 && this.verifyEmail(email)) {
             let payload={
                 name: this.state.name,
                 email: this.state.email,
@@ -59,17 +74,7 @@ class AddEmployee extends React.Component {
             }
             dispatch(employeeactions.createEmployee(payload));
         }
-    }
-
-    handleEmailValidation(value) {
-      debugger;
-      const mailformat = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-      if(value && mailformat.test(value.toLowerCase)){
-        return true;
-      } else {
-        return false;
       }
-    }
 
     render() {
         const {name,email,age,salary,submitted } = this.state;
@@ -97,6 +102,9 @@ class AddEmployee extends React.Component {
                             <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
+                            }
+                            {submitted && !this.handleEmailValidation({email}) && 
+                                <div className="help-block">Please enter a valid email format</div>
                             }
                             
                         </div>

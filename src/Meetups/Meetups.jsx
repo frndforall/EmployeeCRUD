@@ -20,8 +20,9 @@ function MeetupDetails(props) {
                 <CardBody>
                   Name: <Link to={itemLink}>{item.description}</Link><br/>
                   Started: {item.createdAt}<br/>
-                  Item From: {item.timeFrom}<br/>
-                  Item to: {item.timeTo}<br/>
+                  From: {item.timeFrom}<br/>
+                  to: {item.timeTo}<br/>
+                  Subscribers: {item.joinedPeopleCount}
                 </CardBody>
               </Card>
              </Col>

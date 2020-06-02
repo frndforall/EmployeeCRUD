@@ -22,7 +22,6 @@ class MeetupDetails extends React.Component {
     }
 
     render() {
-        debugger;
         const {meetupDetails} = this.props;
         const meetupData = meetupDetails.items;
         const user = localStorage.getItem('user');
@@ -34,7 +33,9 @@ class MeetupDetails extends React.Component {
               <Col>  
                 <Card className="text-center">  
                   <CardHeader>
-                    <strong><i className="icon-info pr-1"></i>Meetup Name: {meetupData && meetupData.title}</strong>
+                    <h1><i className="icon-info pr-1"></i>{meetupData && meetupData.title}</h1><br/>
+                    <strong><i className="icon-info pr-1"></i>Meetup Owner: {meetupData && meetupData.meetupCreator.name}</strong><br/>
+
                   </CardHeader>
                   <CardBody >    
                       {meetup.loading && <em>Loading Details...</em>}
@@ -48,7 +49,7 @@ class MeetupDetails extends React.Component {
                                   <img src={meetupData &&meetupData.image} width='200px' height='200px' /><br/>
                                   Description : {meetupData &&meetupData.description}<br/>
                                   Short Info  : {meetupData && meetupData.shortInfo} <br />
-                                  <strong>People Count: {meetupData && meetupData.joinedPeopleCount}<br /> </strong>
+                                  <strong>Subscribers: {meetupData && meetupData.joinedPeopleCount}<br /> </strong>
                                   Meetup From: {meetupData && meetupData.timeFrom}<br />
                                   Meetup To: {meetupData && meetupData.timeTo}<br />
                                   
@@ -59,7 +60,7 @@ class MeetupDetails extends React.Component {
                             <Card className="text-center">
                               <CardBody>
                                   <MeetupCategory category = {meetupData && meetupData.category}/>
-                                  <MeetupUser user = {meetupData && meetupData.meetupCreator}/>
+                                  <MeetupUsers joinedPeople = {meetupData && meetupData.joinedPeople}/>
                               </CardBody>
                             </Card>
                           </Col>
@@ -84,7 +85,6 @@ class MeetupDetails extends React.Component {
 
     
     _isUserJoinedInMeetup(userData,meetupData) {
-      debugger;
       const user = JSON.parse(userData);
       const joinedMeetup = user.joinedMeetups;
       console.log('Meetup '+meetup);
@@ -92,7 +92,6 @@ class MeetupDetails extends React.Component {
       }
 
       _isUserOwner(userData,meetupData) {
-        debugger;
         const user = JSON.parse(userData);
         const creator = meetupData.meetupCreator;
         console.log('Meetup '+creator);
@@ -132,18 +131,23 @@ function MeetupCategory(props) {
   );
 }
 
-function MeetupUser(props) {
+
+function MeetupUsers(props) {
+  debugger;
+  console.log(props.joinedPeople);
   return(
     <div className="app flex-row align-items-center">
-      
-      <Card >
-      
-      <Card.Body>
-        <img width='170px' height='170px'variant="top" src={props.user && props.user.avatar} />
-        <Card.Text>
-             Meetup Owner: {props.user && props.user.name}
-        </Card.Text>
-      </Card.Body>
+      <strong>Subscribers</strong>
+    <Card >
+    {  
+        props.joinedPeople && props.joinedPeople.map((item, id) => { 
+          return (<Card key={id}>
+             {item.name}
+            </Card>)
+
+        })
+
+    } 
     </Card>
     </div>
   );

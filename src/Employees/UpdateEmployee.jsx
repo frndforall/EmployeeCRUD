@@ -63,6 +63,16 @@ class UpdateEmployee extends React.Component {
         this.setState({ [name]: value });
       }
     }
+
+    handleEmailValidation(value) {
+      debugger;
+      const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(value && mailformat.test(value.email)){
+        return true;
+      } else {
+        return false;
+      }
+    }
     
     handleClick(e){
         this.setState({ submitted: true });

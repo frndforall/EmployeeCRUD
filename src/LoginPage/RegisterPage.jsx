@@ -22,6 +22,7 @@ class RegisterPage extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleEmailValidation = this.handleEmailValidation.bind(this);
+        this.verifyEmail= this.verifyEmail.bind(this);
     }
 
     onCancel= (e) => {
@@ -40,7 +41,8 @@ class RegisterPage extends React.Component {
         const { dispatch } = this.props;
         const {name,username,email,password,passwordConfirmation } = this.state;
         if (name && username && email && password && passwordConfirmation &&
-          (password.length>=6) && (password===passwordConfirmation)) {
+          (password.length>=6) && (password===passwordConfirmation) &&
+          this.verifyEmail(email)) {
             let payload={
                 email: this.state.email,
                 name: this.state.name,
@@ -54,14 +56,18 @@ class RegisterPage extends React.Component {
         }
     }
 
-    handleEmailValidation(value) {
+    verifyEmail(email) {
       debugger;
       const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if(value && mailformat.test(value.email)){
+      if(email && mailformat.test(email)){
         return true;
       } else {
         return false;
       }
+    }
+
+    handleEmailValidation(value) {
+      this.verifyEmail(value.email);
     }
 
     
