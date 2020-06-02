@@ -25,6 +25,7 @@ class AddEmployee extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleNumberChange = this.handleNumberChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleEmailValidation = this.handleEmailValidation.bind(this);
     }
 
     onCancel= (e) => {
@@ -60,6 +61,16 @@ class AddEmployee extends React.Component {
         }
     }
 
+    handleEmailValidation(value) {
+      debugger;
+      const mailformat = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+      if(value && mailformat.test(value.toLowerCase)){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     render() {
         const {name,email,age,salary,submitted } = this.state;
         return (
@@ -87,6 +98,7 @@ class AddEmployee extends React.Component {
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
                             }
+                            
                         </div>
                         <div className={'form-group' + (submitted && !salary ? ' has-error' : '')}>
                             <label htmlFor="salary">Salary</label>

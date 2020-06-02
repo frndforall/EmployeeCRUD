@@ -1,9 +1,11 @@
 
-// import { authHeader } from '../_helpers';
+import { authHeader } from '../_helpers';
 
 export const meetupService = {
     getAllMeetups,
-    getMeetupDetails
+    getMeetupDetails,
+    joinMeetup,
+    leaveMeetup
 };
 
 function getAllMeetups(){
@@ -24,6 +26,33 @@ function getMeetupDetails(id){
         method: 'get',
     };
     return fetch('http://localhost:3001/api/v1/meetups/'+id, requestOptions)
+    .then(handleResponse)
+    .then(meetup => {
+        return meetup;
+    });
+} 
+
+function joinMeetup(id){
+    debugger;
+    const requestOptions = {
+        method: 'post',
+        headers: authHeader()
+
+    };
+    return fetch('http://localhost:3001/api/v1/meetups/'+id+'/join', requestOptions)
+    .then(handleResponse)
+    .then(meetup => {
+        return meetup;
+    });
+} 
+
+function leaveMeetup(id){
+    debugger;
+    const requestOptions = {
+        method: 'post',
+        headers: authHeader()
+    };
+    return fetch('http://localhost:3001/api/v1/meetups/'+id+'/leave', requestOptions)
     .then(handleResponse)
     .then(meetup => {
         return meetup;

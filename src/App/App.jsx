@@ -7,7 +7,7 @@ import { PrivateRoute } from '../_components';
 import { LoginPage, RegisterPage } from '../LoginPage';
 import { EmployeeDetails,AddEmployee,UpdateEmployee } from '../Employees';
 import { Meetups,MeetupDetails } from '../Meetups';
-import HomePage from '../HomePage/HomePage';
+
 
 class App extends React.Component {
     constructor(props) {

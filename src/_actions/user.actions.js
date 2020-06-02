@@ -7,7 +7,8 @@ export const userActions = {
     login,
     logout,
     register,
-    getAll
+    getAll,
+    getUserDetails
 };
 
 function login(username, password) {
@@ -65,7 +66,6 @@ function logout() {
 function getAll() {
     return dispatch => {
         dispatch(request());
-
         userService.getAll()
             .then(
                 users => dispatch(success(users)),
@@ -76,4 +76,19 @@ function getAll() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+
+function getUserDetails() {
+    return dispatch => {
+        dispatch(request());
+        userService.getUserDetails()
+            .then(
+                users => dispatch(success(users)),
+            );
+    };
+
+    function request() { return { type: userConstants.GET_USER_REQUEST } }
+    function success(users) { return { type: userConstants.GET_USER_SUCCESS, users } }
+    function failure(error) { return { type: userConstants.GET_USER_FAILURE, error } }
 }

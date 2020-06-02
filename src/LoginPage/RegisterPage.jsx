@@ -55,8 +55,9 @@ class RegisterPage extends React.Component {
     }
 
     handleEmailValidation(value) {
+      debugger;
       const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if(value && mailformat.test(String(value).toLowerCase)){
+      if(value && mailformat.test(value.email)){
         return true;
       } else {
         return false;
@@ -104,9 +105,9 @@ class RegisterPage extends React.Component {
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
                             }
-                            {/* {submitted && !this.handleEmailValidation({email}) && 
+                            {submitted && !this.handleEmailValidation({email}) && 
                                 <div className="help-block">Please enter a valid email format</div>
-                            } */}
+                            }
 
                         </div>
                         <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
