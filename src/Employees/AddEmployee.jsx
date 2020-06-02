@@ -65,7 +65,7 @@ class AddEmployee extends React.Component {
         this.setState({ submitted: true });
         const { dispatch } = this.props;
         const {name,email,age,salary } = this.state;
-        if (name && email && age && salary && age<100) {
+        if (name && email && age && salary && age<100 && this.verifyEmail(email)) {
             let payload={
                 name: this.state.name,
                 email: this.state.email,
@@ -102,9 +102,6 @@ class AddEmployee extends React.Component {
                             <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
-                            }
-                            {submitted && !this.handleEmailValidation({email}) && 
-                                <div className="help-block">Please enter a valid email format</div>
                             }
                             
                         </div>

@@ -23,7 +23,6 @@ class App extends React.Component {
     }
 
     render() {
-        const { alert } = this.props;
         debugger;
         return (
             <div>
