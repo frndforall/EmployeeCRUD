@@ -40,7 +40,7 @@ export function meetupDetails(state = {}, action) {
 
 export function joinMeetup(state = {}, action) {
     switch (action.type) {
-    case meetupConstants.JOIN_MEETUP_SUCCESS:
+    case meetupConstants.JOIN_MEETUP_REQUEST:
       return {
         loading: true
       };

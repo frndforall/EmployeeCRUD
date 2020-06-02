@@ -65,7 +65,7 @@ class AddEmployee extends React.Component {
         this.setState({ submitted: true });
         const { dispatch } = this.props;
         const {name,email,age,salary } = this.state;
-        if (name && email && age && salary && age<100 && this.verifyEmail(email)) {
+        if (name && email && age && salary && age<100) {
             let payload={
                 name: this.state.name,
                 email: this.state.email,

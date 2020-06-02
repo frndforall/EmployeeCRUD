@@ -44,7 +44,7 @@ function getMeetupDetails(id) {
 
     function request() { return { type: meetupConstants.ALL_SINGLE_REQUEST} }
     function success(meetup) { return { type: meetupConstants.GET_SINLGE_SUCCESS, meetup } }
-    function failure(error) { return { type: meetupConstants.GET_SINGLE_FAILURE, error } }
+    // function failure(error) { return { type: meetupConstants.GET_SINGLE_FAILURE, error } }
 }
 
 function joinMeetup(meetupId) {
@@ -63,7 +63,7 @@ function joinMeetup(meetupId) {
 
     function request() { return { type: meetupConstants.JOIN_MEETUP_REQUEST} }
     function success(meetup) { return { type: meetupConstants.JOIN_MEETUP_SUCCESS, meetup } }
-    function failure(error) { return { type: meetupConstants.JOIN_MEETUP_FAILURE, error } }
+    // function failure(error) { return { type: meetupConstants.JOIN_MEETUP_FAILURE, error } }
 }
 
 function leaveMeetup(meetupId) {
@@ -82,7 +82,7 @@ function leaveMeetup(meetupId) {
 
     function request() { return { type: meetupConstants.LEAVE_MEETUP_REQUEST} }
     function success(meetup) { return { type: meetupConstants.LEAVE_MEETUP_SUCCESS, meetup } }
-    function failure(error) { return { type: meetupConstants.LEAVE_MEETUP_FAILURE, error } }
+    // function failure(error) { return { type: meetupConstants.LEAVE_MEETUP_FAILURE, error } }
 }
 
 

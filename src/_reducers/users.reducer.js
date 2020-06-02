@@ -59,3 +59,23 @@ export function userDetails(state = {}, action) {
       return state
   }
 }
+
+export function loginDetails(state = {}, action) {
+  switch (action.type) {
+    case userConstants.USERS_LOGIN_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.USERS_LOGIN_SUCCESS:
+      return {
+        items: action.user
+      };
+    case userConstants.USERS_LOGIN_FAILURE:
+      return { 
+
+        error: action.error
+      };
+    default:
+      return state
+  }
+}

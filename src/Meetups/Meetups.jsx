@@ -32,10 +32,6 @@ function MeetupDetails(props) {
 
 class Meetups extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.dispatch(meetupactions.getAllMeetups());
     }

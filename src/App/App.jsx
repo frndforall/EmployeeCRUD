@@ -7,6 +7,8 @@ import { PrivateRoute } from '../_components';
 import { LoginPage, RegisterPage } from '../LoginPage';
 import { EmployeeDetails,AddEmployee,UpdateEmployee } from '../Employees';
 import { Meetups,MeetupDetails } from '../Meetups';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 class App extends React.Component {
@@ -25,11 +27,9 @@ class App extends React.Component {
         debugger;
         return (
             <div>
+                <ToastContainer />
                 <div >
                     <div >
-                        {alert.message &&
-                            <div className={`alert ${alert.type}`}>{alert.message}</div>
-                        }
                         <Router history={history}>
                             <div>
                                 <PrivateRoute exact path="/EmployeeList" component={EmployeeDetails} />

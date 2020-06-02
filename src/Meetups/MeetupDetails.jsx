@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navigation from '../App/Nav';
 import { meetupactions } from '../_actions';
-import { Container,CardImg, CardBody, CardHeader, Col, Row, Button } from 'reactstrap';
+import { Container,CardBody, CardHeader, Col, Row, Button } from 'reactstrap';
 import Card from 'react-bootstrap/Card';
 
 
@@ -46,7 +45,7 @@ class MeetupDetails extends React.Component {
                             <Card className="text-center">
 
                               <CardBody>
-                                  <img src={meetupData &&meetupData.image} width='200px' height='200px' /><br/>
+                                  <img src={meetupData &&meetupData.image} alt='' width='200px' height='200px' /><br/>
                                   Description : {meetupData &&meetupData.description}<br/>
                                   Short Info  : {meetupData && meetupData.shortInfo} <br />
                                   <strong>Subscribers: {meetupData && meetupData.joinedPeopleCount}<br /> </strong>
