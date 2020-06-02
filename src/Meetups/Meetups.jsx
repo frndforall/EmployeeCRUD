@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Navigation from '../App/Nav';
 import { meetupactions } from '../_actions';
 import {Table , Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-// import { format } from "date-fns";
 
 
 function MeetupDetails(props) {
@@ -42,7 +41,7 @@ class Meetups extends React.Component {
         return (
             <div className="animated fadeIn">
                 <Navigation />
-                {meetups.loading && <em>Loading users...</em>}
+                {meetups.loading && <em>Loading Meetups...</em>}
                 {meetups.error && alert('Error in API call'+meetups.error)}
                 {meetups.items &&
                      <div className="animated fadeIn">

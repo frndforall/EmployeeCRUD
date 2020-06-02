@@ -32,7 +32,7 @@ class MeetupDetails extends React.Component {
               <Col>  
                 <Card className="text-center">  
                   <CardHeader>
-                    <h1><i className="icon-info pr-1"></i>{meetupData && meetupData.title}</h1><br/>
+                    <h1><i className="icon-info pr-1"></i>{meetupData && meetupData.title}</h1>
                     <strong><i className="icon-info pr-1"></i>Meetup Owner: {meetupData && meetupData.meetupCreator.name}</strong><br/>
 
                   </CardHeader>
@@ -46,12 +46,12 @@ class MeetupDetails extends React.Component {
 
                               <CardBody>
                                   <img src={meetupData &&meetupData.image} alt='' width='200px' height='200px' /><br/>
-                                  Description : {meetupData &&meetupData.description}<br/>
+                                  Description : <strong>{meetupData &&meetupData.description}</strong><br/>
                                   Short Info  : {meetupData && meetupData.shortInfo} <br />
                                   <strong>Subscribers: {meetupData && meetupData.joinedPeopleCount}<br /> </strong>
                                   Meetup From: {meetupData && meetupData.timeFrom}<br />
-                                  Meetup To: {meetupData && meetupData.timeTo}<br />
-                                  
+                                  Meetup To: {meetupData && meetupData.timeTo}
+
                                </CardBody>
                             </Card>
                           </Col>
