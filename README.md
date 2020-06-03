@@ -1,4 +1,4 @@
-# EmployeeCRUD
+# CRUD DEMO APP
  CRUD with JWT
  
  # Dependencies: 
