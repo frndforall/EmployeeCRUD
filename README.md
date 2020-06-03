@@ -12,9 +12,7 @@ Please install softwares and make sure the command line properties are set and a
 
  # Server:
  
-Mongo DB is configured using Cloud Sandbox cluster. We can install the local DB and configure the connection details. For this project, data is pre populated in Cloud DB and can be used directly.
-	
-APIs are hosted using Heroku.
+Mongo DB is configured using Cloud Sandbox cluster. APIs are hosted using Heroku.
 	
 # Application:
 React JS framework is used to implement the UI. 
