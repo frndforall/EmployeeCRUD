@@ -1,5 +1,5 @@
 
-// import { authHeader } from '../_helpers';
+import {baseUrl as baseUrl} from '../config';
 
 export const employeeservice = {
 
@@ -15,7 +15,7 @@ function getAllEmployees(){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/employees', requestOptions)
+    return fetch(baseUrl+'/employees', requestOptions)
     .then(handleResponse)
     .then(employees => {
         return employees;
@@ -26,7 +26,7 @@ function getEmployeeDetails(id){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/employees/employeesDetails?id='+id, requestOptions)
+    return fetch(baseUrl+'/employees/employeesDetails?id='+id, requestOptions)
     .then(handleResponse)
     .then(employee => {
         return employee;
@@ -39,7 +39,7 @@ function createEmployee(payload) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     };
-    return fetch('http://localhost:3001/api/v1/employees/create', requestOptions)
+    return fetch(baseUrl+'/employees/create', requestOptions)
     // .then(handleResponse)
     .then(employee => {
         return employee;
@@ -53,7 +53,7 @@ function updateEmployee(payload,id) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     };
-    return fetch('http://localhost:3001/api/v1/employees/update?id='+id, requestOptions)
+    return fetch(baseUrl+'/employees/update?id='+id, requestOptions)
     // .then(handleResponse)
     .then(employee => {
         return employee;
@@ -65,7 +65,7 @@ function deleteEmployee(id) {
     const requestOptions = {
         method: 'post',
     };
-    return fetch('http://localhost:3001/api/v1/employees/delete?id='+id, requestOptions)
+    return fetch(baseUrl+'/employees/delete?id='+id, requestOptions)
     // .then(handleResponse)
     .then(employee => {
         return employee;

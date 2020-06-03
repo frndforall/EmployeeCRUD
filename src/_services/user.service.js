@@ -1,5 +1,6 @@
 
 import { authHeader } from '../_helpers';
+import { baseUrl } from '../config';
 export const userService = {
     login,
     logout,
@@ -15,7 +16,7 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     };
 
-    return fetch('http://localhost:3001/api/v1/users/login', requestOptions)
+    return fetch(baseUrl+'/users/login', requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -33,7 +34,7 @@ function register(payload) {
     };
     console.log(payload);
     debugger;
-    return fetch('http://localhost:3001/api/v1/users/register', requestOptions)
+    return fetch(baseUrl+'/users/register', requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);
@@ -52,7 +53,7 @@ function getUserDetails() {
         headers: authHeader()
     };
     debugger;
-    return fetch('http://localhost:3001/api/v1/users/me', requestOptions)
+    return fetch(baseUrl+'/users/me', requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);

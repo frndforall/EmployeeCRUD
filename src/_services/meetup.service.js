@@ -1,5 +1,6 @@
 
 import { authHeader } from '../_helpers';
+import {baseUrl as baseUrl} from '../config';
 
 export const meetupService = {
     getAllMeetups,
@@ -12,7 +13,8 @@ function getAllMeetups(){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/meetups', requestOptions)
+    
+    return fetch(baseUrl+'/meetups', requestOptions)
     .then(handleResponse)
     .then(meetups => {
         console.log(meetups);
@@ -25,7 +27,7 @@ function getMeetupDetails(id){
     const requestOptions = {
         method: 'get',
     };
-    return fetch('http://localhost:3001/api/v1/meetups/'+id, requestOptions)
+    return fetch(baseUrl+'/meetups/'+id, requestOptions)
     .then(handleResponse)
     .then(meetup => {
         return meetup;
@@ -39,7 +41,7 @@ function joinMeetup(id){
         headers: authHeader()
 
     };
-    return fetch('http://localhost:3001/api/v1/meetups/'+id+'/join', requestOptions)
+    return fetch(baseUrl+'/meetups/'+id+'/join', requestOptions)
     .then(handleResponse)
     .then(meetup => {
         return meetup;
@@ -52,7 +54,7 @@ function leaveMeetup(id){
         method: 'post',
         headers: authHeader()
     };
-    return fetch('http://localhost:3001/api/v1/meetups/'+id+'/leave', requestOptions)
+    return fetch(baseUrl+'/meetups/'+id+'/leave', requestOptions)
     .then(handleResponse)
     .then(meetup => {
         return meetup;
