@@ -33,7 +33,15 @@ class MeetupDetails extends React.Component {
         const user = localStorage.getItem('user');
         return (
             <div className="app flex-row align-items-center">
-                <Navigation/>
+                <Navigation/> {
+                meetupDetails.loading && <div class="d-flex justify-content-center">
+                    <br/>
+                    <br/>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            }
                 <Container>
                     <Row>
                         <Col>
@@ -44,19 +52,14 @@ class MeetupDetails extends React.Component {
                                         {
                                         meetupData && meetupData.title
                                     }</h1>
-                                    <strong>
-                                        <i className="icon-info pr-1"></i>Meetup Owner: {
-                                        meetupData && meetupData.meetupCreator.name
-                                    }</strong><br/>
+                                    <strong> {
+                                        meetupData && meetupData.meetupCreator.name ? <i className="icon-info pr-1">Meetup Owner: {
+                                            meetupData.meetupCreator.name
+                                        }</i> : <></>
+                                    } </strong><br/>
 
                                 </CardHeader>
                                 <CardBody> {
-                                    meetup.loading && <em>Loading Details...</em>
-                                }
-                                    {
-                                    meetup.error && <span className="text-danger">ERROR</span>
-                                }
-                                    {
                                     meetupData && <div>
                                         <Row>
                                             <Col lg={6}>

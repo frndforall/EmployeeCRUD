@@ -65,7 +65,13 @@ class Meetups extends React.Component {
         return (
             <div className="animated fadeIn">
                 <Navigation/> {
-                meetups.loading && <em>Loading Meetups...</em>
+                meetups.loading && <div class="d-flex justify-content-center">
+                    <br/>
+                    <br/>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
             }
                 {
                 meetups.error && alert('Error in API call' + meetups.error)
