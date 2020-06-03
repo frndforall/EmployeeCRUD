@@ -1,6 +1,6 @@
 
 import { authHeader } from '../_helpers';
-import {baseUrl as baseUrl} from '../config';
+import {baseUrl} from '../config';
 
 export const meetupService = {
     getAllMeetups,

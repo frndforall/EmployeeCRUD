@@ -1,5 +1,5 @@
 
-import {baseUrl as baseUrl} from '../config';
+import {baseUrl} from '../config';
 
 export const employeeservice = {
 
