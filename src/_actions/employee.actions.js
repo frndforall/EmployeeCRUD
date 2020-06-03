@@ -63,7 +63,8 @@ function deleteEmployee(id) {
 
 function createEmployee(payload) {
 
-    return dispatch => { // dispatch(request());
+    return dispatch => {
+        dispatch(request());
         employeeservice.createEmployee(payload).then(employee => {
             dispatch(success(employee));
             history.push('/EmployeeList');
@@ -72,7 +73,9 @@ function createEmployee(payload) {
             // dispatch(alertActions.error(error));
         });
     };
-    // function request() { return { type: employeeConstants.GET_CREATE_REQUEST} }
+    function request() {
+        return {type: employeeConstants.GET_CREATE_REQUEST}
+    }
     function success(employee) {
         return {type: employeeConstants.GET_CREATE_SUCCESS, employee}
     }
@@ -84,7 +87,8 @@ function createEmployee(payload) {
 
 function updateEmployee(payload, id) {
 
-    return dispatch => { // dispatch(request());
+    return dispatch => {
+        dispatch(request());
         employeeservice.updateEmployee(payload, id).then(employee => {
             dispatch(success(employee));
             history.push('/EmployeeList');
@@ -93,7 +97,9 @@ function updateEmployee(payload, id) {
             // dispatch(alertActions.error(error));
         });
     };
-    // function request() { return { type: employeeConstants.GET_UPDATE_REQUEST} }
+    function request() {
+        return {type: employeeConstants.GET_UPDATE_REQUEST}
+    }
     function success(employee) {
         return {type: employeeConstants.GET_UPDATE_SUCCESS, employee}
     }

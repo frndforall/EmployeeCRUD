@@ -90,6 +90,7 @@ class AddEmployee extends React.Component {
             salary,
             submitted
         } = this.state;
+        const {employeeCreate} = this.props
         return (
             <div className="app flex-row align-items-center">
                 <Navigation/>
@@ -161,12 +162,18 @@ class AddEmployee extends React.Component {
                                         <CardFooter className="p-4">
                                             <Row>
                                                 <Col xs="12" sm="6">
-                                                    <Button className="btn btn-info mb-1" block
-                                                        onClick={
-                                                            this.handleClick
-                                                    }>
-                                                        <span>Save</span>
-                                                    </Button>
+                                                    <div> {
+                                                        employeeCreate && employeeCreate.loading ? <button class="btn btn-info mb-1" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                            Updating...
+                                                        </button> : <Button className="btn btn-info mb-1" block
+                                                            onClick={
+                                                                this.handleClick
+                                                        }>
+                                                            <span>Save</span>
+                                                        </Button>
+                                                    } </div>
+
                                                 </Col>
                                                 <Col xs="12" sm="6">
                                                     <Button className="btn btn-info mb-1" block
@@ -190,8 +197,8 @@ class AddEmployee extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const {employees} = state;
-    return {employees};
+    const {employeeCreate} = state;
+    return {employeeCreate};
 }
 
 const connectedEmployee = connect(mapStateToProps)(AddEmployee);

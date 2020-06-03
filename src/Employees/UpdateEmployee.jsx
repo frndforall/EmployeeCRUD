@@ -99,7 +99,7 @@ class UpdateEmployee extends React.Component {
     }
 
     render() {
-        const {employeeDetails} = this.props;
+        const {employeeDetails, employeeUpdate} = this.props;
         const {
             name,
             email,
@@ -109,21 +109,28 @@ class UpdateEmployee extends React.Component {
         } = this.state;
         return (
             <div className="app flex-row align-items-center">
-                <Container>
+                {
+                employeeDetails.loading && <div class="d-flex justify-content-center">
+                    <br/>
+                    <br/>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            }
+                {
+                employeeDetails.error && alert('Error in API call' + employeeDetails.error)
+            }
+                {
+                employeeDetails.items && <Container>
                     <Row className="justify-content-center">
                         <Col md="12" lg="10" xl="8">
                             <Card className="mx-4">
                                 <CardBody className="p-4">
                                     <Form>
                                         <h1>Update Employee</h1>
-                                        {
-                                        employeeDetails.loading && <em>Loading users...</em>
-                                    }
-                                        {
-                                        employeeDetails.error && <span className="text-danger">ERROR</span>
-                                    }
-                                        {
-                                        employeeDetails.items && <div>
+
+                                        <div>
 
                                             <div className={
                                                 'form-group' + (
@@ -178,16 +185,22 @@ class UpdateEmployee extends React.Component {
                                                 submitted && !age && <div className="help-block">Age is required</div>
                                             } </div>
                                         </div>
-                                    }
+
                                         <CardFooter className="p-4">
                                             <Row>
                                                 <Col xs="12" sm="6">
-                                                    <Button className="btn btn-info mb-1" block
-                                                        onClick={
-                                                            this.handleClick
-                                                    }>
-                                                        <span>Update</span>
-                                                    </Button>
+                                                    <div> {
+                                                        employeeUpdate && employeeUpdate.loading ? <button class="btn btn-info mb-1" type="button" disabled>
+                                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                            Saving...
+                                                        </button> : <Button className="btn btn-info mb-1" block
+                                                            onClick={
+                                                                this.handleClick
+                                                        }>
+                                                            <span>Update</span>
+                                                        </Button>
+                                                    } </div>
+
                                                 </Col>
                                                 <Col xs="12" sm="6">
                                                     <Button className="btn btn-info mb-1" block
@@ -205,14 +218,14 @@ class UpdateEmployee extends React.Component {
                         </Col>
                     </Row>
                 </Container>
-            </div>
+            } </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const {employeeDetails} = state;
-    return {employeeDetails};
+    const {employeeDetails, employeeUpdate} = state;
+    return {employeeDetails, employeeUpdate};
 }
 
 const connectedEmployee = connect(mapStateToProps)(UpdateEmployee);
