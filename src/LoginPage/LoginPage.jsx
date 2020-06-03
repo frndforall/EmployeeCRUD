@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from '../_actions';
 import { Button,  Card, CardBody, Container,  Col, Row } from 'reactstrap';
-import { toast }  from 'react-toastify';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -46,8 +45,8 @@ class LoginPage extends React.Component {
         return (
             <div className="jumbotron">
             <div className="container">
-                {submitted && loginDetails && loginDetails.error && alert(loginDetails.error)};
-                <div className="col-sm-6 col-sm-offset-3">
+                {submitted && loginDetails && loginDetails.error && alert(loginDetails.error)}
+                <div className="col-sm-10 col-sm-offset-3">
                 <Container>  
                 <Row className="justify-content-center">  
                     <Col md="12" lg="15" xl="15">  

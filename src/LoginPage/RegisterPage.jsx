@@ -26,7 +26,7 @@ class RegisterPage extends React.Component {
     }
 
     onCancel= (e) => {
-        history.push('/EmployeeList');
+        history.push('/');
     }
 
 
@@ -41,8 +41,7 @@ class RegisterPage extends React.Component {
         const { dispatch } = this.props;
         const {name,username,email,password,passwordConfirmation } = this.state;
         if (name && username && email && password && passwordConfirmation &&
-          (password.length>=6) && (password===passwordConfirmation) &&
-          this.verifyEmail(email)) {
+          (password.length>=6) && (password===passwordConfirmation) ) {
             let payload={
                 email: this.state.email,
                 name: this.state.name,
@@ -111,9 +110,9 @@ class RegisterPage extends React.Component {
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
                             }
-                            {submitted && !this.handleEmailValidation({email}) && 
+                            {/* {submitted && email && !this.handleEmailValidation({email}) && 
                                 <div className="help-block">Please enter a valid email format</div>
-                            }
+                            } */}
 
                         </div>
                         <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
@@ -123,7 +122,7 @@ class RegisterPage extends React.Component {
                                 <div className="help-block">Password is required</div>
                             }
                             {submitted && password && password.length < 6 &&
-                                <div className="help-block">Password is too short to be saved</div>
+                                <span className="help-block">Password is too short to be saved</span>
                             }
                         </div>
                         <div className={'form-group' + (submitted && !passwordConfirmation ? ' has-error' : '')}>

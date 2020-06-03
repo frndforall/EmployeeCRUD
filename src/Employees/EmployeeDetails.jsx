@@ -50,7 +50,7 @@ class EmployeeDetails extends React.Component {
         return (
             <div className="animated fadeIn">
                 <Navigation />
-                {employees.loading && <em>Loading users...</em>}
+                {employees.loading && <em>Loading Employees...</em>}
                 {employees.error && alert('Error in API call'+employees.error)}
                 {employees.items &&
                     <Row>  
