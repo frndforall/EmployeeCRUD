@@ -22,10 +22,11 @@ class RegisterPage extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleEmailValidation = this.handleEmailValidation.bind(this);
+        this.verifyEmail= this.verifyEmail.bind(this);
     }
 
     onCancel= (e) => {
-        history.push('/EmployeeList');
+        history.push('/');
     }
 
 
@@ -40,7 +41,7 @@ class RegisterPage extends React.Component {
         const { dispatch } = this.props;
         const {name,username,email,password,passwordConfirmation } = this.state;
         if (name && username && email && password && passwordConfirmation &&
-          (password.length>=6) && (password===passwordConfirmation)) {
+          (password.length>=6) && (password===passwordConfirmation) ) {
             let payload={
                 email: this.state.email,
                 name: this.state.name,
@@ -54,13 +55,18 @@ class RegisterPage extends React.Component {
         }
     }
 
-    handleEmailValidation(value) {
+    verifyEmail(email) {
+      debugger;
       const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if(value && mailformat.test(String(value).toLowerCase)){
+      if(email && mailformat.test(email)){
         return true;
       } else {
         return false;
       }
+    }
+
+    handleEmailValidation(value) {
+      this.verifyEmail(value.email);
     }
 
     
@@ -104,7 +110,7 @@ class RegisterPage extends React.Component {
                             {submitted && !email && 
                                 <div className="help-block">Email is required</div>
                             }
-                            {/* {submitted && !this.handleEmailValidation({email}) && 
+                            {/* {submitted && email && !this.handleEmailValidation({email}) && 
                                 <div className="help-block">Please enter a valid email format</div>
                             } */}
 
@@ -116,7 +122,7 @@ class RegisterPage extends React.Component {
                                 <div className="help-block">Password is required</div>
                             }
                             {submitted && password && password.length < 6 &&
-                                <div className="help-block">Password is too short to be saved</div>
+                                <span className="help-block">Password is too short to be saved</span>
                             }
                         </div>
                         <div className={'form-group' + (submitted && !passwordConfirmation ? ' has-error' : '')}>

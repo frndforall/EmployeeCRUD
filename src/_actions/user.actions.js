@@ -7,7 +7,8 @@ export const userActions = {
     login,
     logout,
     register,
-    getAll
+    getAll,
+    getUserDetails
 };
 
 function login(username, password) {
@@ -17,19 +18,20 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => { 
+                    debugger;
                     dispatch(success(user));
-                    history.push('/EmployeeList');
+                    history.push('/MeetupsList');
                 },
                 error => {
+                    debugger;
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
                 }
             );
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function request(user) { return { type: userConstants.USERS_LOGIN_REQUEST, user } }
+    function success(user) { return { type: userConstants.USERS_LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.USERS_LOGIN_FAILURE, error } }
 }
 
 function register(payload) {
@@ -65,7 +67,6 @@ function logout() {
 function getAll() {
     return dispatch => {
         dispatch(request());
-
         userService.getAll()
             .then(
                 users => dispatch(success(users)),
@@ -76,4 +77,19 @@ function getAll() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+
+function getUserDetails() {
+    return dispatch => {
+        dispatch(request());
+        userService.getUserDetails()
+            .then(
+                users => dispatch(success(users)),
+            );
+    };
+
+    function request() { return { type: userConstants.GET_USER_REQUEST } }
+    function success(users) { return { type: userConstants.GET_USER_SUCCESS, users } }
+    // function failure(error) { return { type: userConstants.GET_USER_FAILURE, error } }
 }

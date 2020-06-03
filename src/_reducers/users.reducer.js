@@ -38,3 +38,44 @@ export function register(state = {}, action) {
       return state
   }
 }
+
+
+
+export function userDetails(state = {}, action) {
+  switch (action.type) {
+    case userConstants.GET_USER_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.GET_USER_SUCCESS:
+      return {
+        items: action.user
+      };
+    case userConstants.GET_USER_FAILURE:
+      return { 
+        error: action.error
+      };
+    default:
+      return state
+  }
+}
+
+export function loginDetails(state = {}, action) {
+  switch (action.type) {
+    case userConstants.USERS_LOGIN_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.USERS_LOGIN_SUCCESS:
+      return {
+        items: action.user
+      };
+    case userConstants.USERS_LOGIN_FAILURE:
+      return { 
+
+        error: action.error
+      };
+    default:
+      return state
+  }
+}

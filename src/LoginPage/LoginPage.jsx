@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from '../_actions';
-import { Button,  Card, CardBody, Container, Form, Col, Row } from 'reactstrap';
+import { Button,  Card, CardBody, Container,  Col, Row } from 'reactstrap';
 
 class LoginPage extends React.Component {
     constructor(props) {
-        super(props);
-
-        // reset login status
-        this.props.dispatch(userActions.logout());
+        super(props);        
 
         this.state = {
             username: '',
@@ -22,6 +19,10 @@ class LoginPage extends React.Component {
     }
 
     handleChange(e) {
+        const { submitted } = this.state;
+        if(submitted){
+            this.setState({ submitted: false });
+        }
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
@@ -38,11 +39,14 @@ class LoginPage extends React.Component {
     }
 
     render() {
+        debugger;
         const { username, password, submitted } = this.state;
+        const {loginDetails} = this.props;
         return (
             <div className="jumbotron">
             <div className="container">
-                <div className="col-sm-6 col-sm-offset-3">
+                {submitted && loginDetails && loginDetails.error && alert(loginDetails.error)}
+                <div className="col-sm-10 col-sm-offset-3">
                 <Container>  
                 <Row className="justify-content-center">  
                     <Col md="12" lg="15" xl="15">  
@@ -87,9 +91,9 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
+    const { loginDetails } = state;
     return {
-        loggingIn
+        loginDetails
     };
 }
 

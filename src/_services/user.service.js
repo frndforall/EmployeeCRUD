@@ -1,9 +1,10 @@
 
-// import { authHeader } from '../_helpers';
+import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
-    register
+    register,
+    getUserDetails
 };
 
 // let users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
@@ -18,7 +19,6 @@ function login(email, password) {
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(user);
             localStorage.setItem('user', JSON.stringify(user));
             return user;
         });
@@ -36,9 +36,7 @@ function register(payload) {
     return fetch('http://localhost:3001/api/v1/users/register', requestOptions)
         .then(handleResponse)
         .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
             console.log(user);
-            // localStorage.setItem('user', JSON.stringify(user));
             return user;
         });
 }
@@ -46,17 +44,24 @@ function register(payload) {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
 }
 
-// function getAll() {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     };
+function getUserDetails() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    debugger;
+    return fetch('http://localhost:3001/api/v1/users/me', requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            console.log(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+        });
 
-//     return Promise.resolve(JSON.stringify(users));
-// }
+    
+}
 
 function handleResponse(response) {
     return response.text().then(text => {

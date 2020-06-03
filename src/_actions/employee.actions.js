@@ -1,6 +1,5 @@
 import { employeeConstants } from '../_constants';
 import { employeeservice } from '../_services';
-import { alertActions } from '.';
 import { history } from '../_helpers';
 
 export const employeeactions = {

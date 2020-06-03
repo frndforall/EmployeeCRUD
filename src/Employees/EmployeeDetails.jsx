@@ -12,6 +12,7 @@ class EmployeeDetails extends React.Component {
         this.deleteEmployee =this.deleteEmployee.bind(this);
         this.confirmDelete = this.confirmDelete.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
+        this.addEmployee = this.addEmployee.bind(this);
         this.updateEmployee = this.updateEmployee.bind(this);
     }
 
@@ -23,6 +24,10 @@ class EmployeeDetails extends React.Component {
         this.props.dispatch(employeeactions.deleteEmployee(id));
     }
 
+    addEmployee = () => {
+        this.props.history.push('/AddEmployee');
+    }
+
     updateEmployee = (id) => {
         console.log(id);
         this.props.history.push({  
@@ -30,7 +35,7 @@ class EmployeeDetails extends React.Component {
         }); 
     }
 
-    editEmployee(id){
+    editEmployee= (id) => {
         window.confirm("Are you sure you wish to update this item?") && this.updateEmployee(id);
     }
 
@@ -45,9 +50,8 @@ class EmployeeDetails extends React.Component {
         return (
             <div className="animated fadeIn">
                 <Navigation />
-                <h1> Employee Details</h1>
-                {employees.loading && <em>Loading users...</em>}
-                {employees.error && alert('Error in API call'+employees.error)};
+                {employees.loading && <em>Loading Employees...</em>}
+                {employees.error && alert('Error in API call'+employees.error)}
                 {employees.items &&
                     <Row>  
                             <Col>  
@@ -55,13 +59,11 @@ class EmployeeDetails extends React.Component {
                                 <CardHeader>  
                                 <i className="fa fa-align-justify"></i> Employee List  
                                 </CardHeader>  
-
                                 <CardBody>  
-
+                                <button className="btn btn-primary" onClick={() => { this.addEmployee() }}>Add Employee</button> <br/>
+                                <br/> 
                                 <Table hover bordered striped responsive size="sm">  
-
                                     <thead>  
-
                                     <tr>
                                         <th>Name</th>  
                                         <th>Email</th>  
@@ -73,16 +75,16 @@ class EmployeeDetails extends React.Component {
                                     <tbody>  
                                     {  
                                         employees.items.map((item, id) => {  
-                                        return <tr> 
+                                        return <tr key={id}> 
                                             <td>{item.name}</td>  
                                             <td>{item.email}</td>  
                                             <td>{item.age}</td>  
                                             <td>{item.salary}</td>  
                                             <td>  
                                             <div>  
-                                                <button className="btn btn-primary" block onClick={() => { this.editEmployee(item._id) }}>Edit</button>  
+                                                <button className="btn btn-primary" onClick={() => { this.editEmployee(item._id) }}>Edit</button>  
                                                 {' '}
-                                                <button className="btn btn-danger" block onClick={() => { this.confirmDelete(item._id) }}>Delete</button>  
+                                                <button className="btn btn-danger"  onClick={() => { this.confirmDelete(item._id) }}>Delete</button>  
                                             </div>  
                                             </td>  
                                         </tr>  

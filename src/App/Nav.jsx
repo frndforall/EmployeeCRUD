@@ -1,25 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import UserData from '../Views/UserOverLay';
+
 
 class Navigation extends React.Component {
+  
   render() {    
+    debugger;
+    const userData = localStorage.getItem('user');
+    const user = userData && JSON.parse(userData);
+  
     return (
-        <nav className="btn btn-warning navbar navbar-expand-lg nav">    
-          <div className="collapse navbar-collapse" >    
-            <ul className="navbar-nav mr-auto">    
-              <li className="nav-item">    
-                <Link to={'/AddEmployee'} className="nav-link">Add Employee</Link>    
-              </li>    
-              <li className="nav-item">    
-                <Link to={'/EmployeeList'} className="nav-link">Employee List</Link> 
-
-              </li>   
-              <li className="nav-item">    
-                <Link to={'/'} className="nav-link">Logout</Link>    
-              </li>    
-            </ul>    
-          </div>    
-        </nav> 
+      <>
+        <Navbar bg="dark" variant="dark">
+          {/* <Navbar.Brand>Welcome {name}</Navbar.Brand> */}
+          <Nav className="mr-auto">
+            <Nav.Link href="/MeetupsList">Meetups</Nav.Link>
+            <Nav.Link href="/EmployeeList">Employee List</Nav.Link>
+            <Nav.Link href="/">Logout</Nav.Link>
+          </Nav>
+          <UserData user={user} />
+        </Navbar>
+      </>
     );
   }
 }
