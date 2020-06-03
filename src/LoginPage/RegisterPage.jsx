@@ -208,6 +208,10 @@ class RegisterPage extends React.Component {
                                                 </Row>
 
                                             </Form>
+                                            <div>
+                                                <small> * Password length must be greater than 6 letters</small><br/>
+                                                <small> * User Name must be greater than 8 letters</small>
+                                            </div>
                                         </CardBody>
                                     </Card>
                                 </Col>
