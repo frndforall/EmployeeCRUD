@@ -17,6 +17,10 @@ Mongo DB is configured using Cloud Sandbox cluster. APIs are hosted using Heroku
 # Application:
 React JS framework is used to implement the UI. 
 
+Application is hosted in https://crud-react-employye.herokuapp.com/ . Please click the link to use it.
+
+To locally run the changes, please clone the project and perform the below operations.
+
 	Steps to run the application:
 	
 	1. Install all dependencies for application using "npm install" in current project folder using command prompt. This would set up the application be start.
